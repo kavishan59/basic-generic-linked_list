@@ -97,6 +97,7 @@ void deleteNode(Node **head, void *key, int (*compareFunc)(void *, void *), void
   }
 }
 
+//delete a Node at specifix index
 void deleteNodeAtIndex(Node **head, int index, void (*freeData)(void *))
 {
   if (*head == NULL || index < 0)
@@ -128,4 +129,16 @@ void deleteNodeAtIndex(Node **head, int index, void (*freeData)(void *))
   if (freeData)
     free(temp->data);
   free(temp);
+}
+
+
+int countNodes(Node *head)
+{
+  int count = 0;
+  while (head != NULL)
+  {
+    count++;
+    head = head->next;
+  }
+  return count;
 }

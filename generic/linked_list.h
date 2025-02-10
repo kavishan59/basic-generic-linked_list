@@ -1,5 +1,6 @@
 
 #ifndef LINKED_LIST_H
+#define LINKED_LIST_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -13,8 +14,17 @@ typedef struct Node
 } Node;
 
 
+//Function prototypes
+
+
+Node *createNode(void *data);
+void appendNode(Node **head, void *data);
+void printLint(Node *head, void (*printFunc)(void *));
+void freeList(Node *head, void (*freeData)(void *));
+Node *searchList(Node *head, void *key, int (*compareFunc)(void *, void *));
+void deleteNode(Node **head, void *key, int (*compareFunc)(void *, void *), void (*freeData)(void *));
+void deleteNodeAtIndex(Node **head, int index, void (*freeData)(void *));
+int countNodes(Node *head);
+
 #endif // !LINKED_LIST_H
-
-
-
 
