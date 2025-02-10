@@ -1,5 +1,8 @@
 
 #include "linked_list.h"
+#include <cstddef>
+#include <cstdlib>
+#include <stdlib.h>
 
 Node *createNode(void *data)
 {
@@ -94,4 +97,35 @@ void deleteNode(Node **head, void *key, int (*compareFunc)(void *, void *), void
   }
 }
 
+void deleteNodeAtIndex(Node **head, int index, void (*freeData)(void *))
+{
+  if (*head == NULL || index < 0)
+    return ;
 
+  Node *temp = *head, *prev = NULL;
+
+  // if deleteing the head node
+  if (index == 0)
+  {
+    *head = temp->next;
+    if (freeData)
+      freeData(temp->data);
+    free(temp);
+    return ;
+  }
+
+  for (int i = 0; temp != NULL && i < index; i++)
+  {
+    prev = temp;
+    temp = temp->next;
+  }
+
+  if (temp == NULL)
+    return ;
+
+  prev->next = temp->next;
+
+  if (freeData)
+    free(temp->data);
+  free(temp);
+}
